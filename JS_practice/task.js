@@ -33,7 +33,7 @@ var removeDuplicates = function (nums) {
 
 console.log(removeDuplicates(nums))
 
-// TODO 125. Valid Palindrome
+// Valid Palindrome
 // https://leetcode.com/problems/valid-palindrome/
 
 /*
