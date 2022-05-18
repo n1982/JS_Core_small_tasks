@@ -6,16 +6,9 @@
 Функция replaceItemsMutate реализует тот же функционал, только мутирует входящий массив и возвращает его же.*/
 
 function replaceItemsClear(arr, item, replaceItem) {
-    /*let arr2 = []
-    arr.forEach(el => {
-        if (el === item) {
-            el = replaceItem
-            arr2.push(el)
-        } else arr2.push(el)
-    });
-    return arr2*/
-    return arr.map((el)=>{
-        if(el === item) return replaceItem
+
+    return arr.map((el) => {
+        if (el === item) return replaceItem
         return el
     })
 }
@@ -30,11 +23,7 @@ function replaceItemsMutate(arr, item, replaceItem) {
     return arr
 }
 
-console.log(replaceItemsClear([1, 2, 3, 4, 2], 2, 'a')); //  [1,'a',3,4,'a']
 const arr = [1, 2, 3, 4, 2];
+replaceItemsClear(arr, 2, 'a'); //  [1,'a',3,4,'a']
 replaceItemsMutate(arr, 2, 'a');
-console.log(arr); // [1,'a',3,4,'a']
 
-/*
-else arr2.push(el)  не стоит писать else линейно т.к это сложнее читать чем просто  + arr2 arr3 и т.д оч плохие имена + replaceItemsClear лучше на map переписать*/
-//Сделал

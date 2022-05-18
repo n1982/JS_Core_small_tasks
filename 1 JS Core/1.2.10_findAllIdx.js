@@ -1,12 +1,6 @@
 /*findAllIdx
 Напишите функцию findAllIdx(arr, value), которая возвращает массив индексов элементов, у которые значение равно value.*/
-/*const arrOut=[]
-for (let i = 0; i < arr.length; i++ ){
-    console.log(i)
-    if (arr[i] === value){
-        arrOut.push(i)
-    }
-}*/
+
 function findAllIdx(arr, value) {
 
     return arr.map((el, index) => {
