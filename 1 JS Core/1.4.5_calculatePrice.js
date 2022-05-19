@@ -25,5 +25,3 @@ const calculatePrice = (orders = []) => {
 };
 
 console.log(calculatePrice(data))
-
-//Тут if/else не нужен. Тебу нужно в качестве аргумента написать orders = [] и просто сделать reduce по orders
