@@ -18,30 +18,29 @@ M          1,000
 */
 
 function solution(roman) {
-    const subMap = {
-        I: 1,
-        V: 5,
-        X: 10,
-        L: 50,
-        C: 100,
-        D: 500,
-        M: 1000
+  const subMap = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+  let arrArabic = roman.split('').map(item => subMap[item]);
+  let res = 0;
+  for (let i = 0; i < arrArabic.length; i++) {
+    let curent = arrArabic[i];
+    let next = arrArabic[i + 1] || 0;
+    if (curent >= next) {
+      res += curent;
+    } else {
+      res = res + (next - curent);
+      i = i + 1;
     }
-    let arrArabic = roman.split('').map((item) => subMap[item])
-    let res = 0
-    for (let i = 0; i < arrArabic.length; i++) {
-        let curent = arrArabic[i]
-        let next = arrArabic[i + 1] || 0
-        if (curent >= next) {
-            res += curent
-        } else {
-            res = res + (next - curent)
-            i = i + 1
-        }
-
-    }
-    console.log(res)
-    return res;
+  }
+  console.log(res);
+  return res;
 }
 // Второй вариант решения
 /*

@@ -18,11 +18,15 @@ avg. cons, distance     avg. cons, distance         avg. cons
 [   7.9  ,   500  ]  ,  [   7.0  ,   600  ]    -->     2.5
 [   7.9  ,   100  ]  ,  [   7.0  ,   600  ]    -->     6.8 */
 
-
 function solve(before, after) {
-    return Math.round((after[0] * after[1] - before[0] * before[1]) / (after[1] - before[1])*10)/10
+  return (
+    Math.round(
+      ((after[0] * after[1] - before[0] * before[1]) / (after[1] - before[1])) *
+        10,
+    ) / 10
+  );
 }
 
-console.log(solve([7.9, 100], [7.0, 200]))
-console.log(solve([7.9, 500], [7.0, 600]))
-console.log(solve([7.9, 100], [7.0, 600]))
+console.log(solve([7.9, 100], [7.0, 200]));
+console.log(solve([7.9, 500], [7.0, 600]));
+console.log(solve([7.9, 100], [7.0, 600]));

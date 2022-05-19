@@ -6,21 +6,13 @@
 Функция должна возвращать новый массив, а не мутировать старый.*/
 
 const moveToStart = (arr, n) => {
-    let newArr = arr.slice()
-    if (n < newArr.length-1) {
-        while(n--)
-            newArr.unshift(newArr.pop());
-    }
-      return newArr;
-
-
+  let newArr = arr.slice();
+  if (n < newArr.length - 1) {
+    while (n--) newArr.unshift(newArr.pop());
+  }
+  return newArr;
 };
 
-console.log(
-    moveToStart([1, 2, 3, 4, 5], 3)
-); // [3, 4, 5, 1, 2]
+console.log(moveToStart([1, 2, 3, 4, 5], 3)); // [3, 4, 5, 1, 2]
 
-console.log(
-    moveToStart([1, 2, 3, 4, 5], 2)
-); // [3, 4, 5, 1, 2]
-
+console.log(moveToStart([1, 2, 3, 4, 5], 2)); // [3, 4, 5, 1, 2]

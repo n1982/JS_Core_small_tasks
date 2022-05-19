@@ -8,19 +8,32 @@
 Функция возвращает: Строку в формате CSV*/
 
 function arrayToCsv(data = []) {
-
-    return data
-        .map(array => array.map(e => {
-            let type = typeof e;
-            if (type !== "number" && type !== "string")
-                throw new Error("Unexpected value");
-            return (type === "string" && e.length>1) ?
-                JSON.stringify(e).replace(/\\/g, "\"") :
-                e
-        }).join(","))
-        .join("\n");
+  return data
+    .map(array =>
+      array
+        .map(e => {
+          let type = typeof e;
+          if (type !== 'number' && type !== 'string')
+            throw new Error('Unexpected value');
+          return type === 'string' && e.length > 1
+            ? JSON.stringify(e).replace(/\\/g, '"')
+            : e;
+        })
+        .join(','),
+    )
+    .join('\n');
 }
 
-console.log(arrayToCsv([[1, 2], ['a', 'b'],])) // '1,2\na,b'
-console.log(arrayToCsv([[1, 2], ['a,b', 'c,d']])) // '1,2\n"a,b","c,d"'
-console.log(arrayToCsv([['"text"', 'other "long" text']]))    // ==> """text""","other ""long"" text"
+console.log(
+  arrayToCsv([
+    [1, 2],
+    ['a', 'b'],
+  ]),
+); // '1,2\na,b'
+console.log(
+  arrayToCsv([
+    [1, 2],
+    ['a,b', 'c,d'],
+  ]),
+); // '1,2\n"a,b","c,d"'
+console.log(arrayToCsv([['"text"', 'other "long" text']])); // ==> """text""","other ""long"" text"

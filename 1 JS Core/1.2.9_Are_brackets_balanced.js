@@ -7,16 +7,14 @@
 Скобки — это парные структуры. У каждой открывающей скобки должна быть соответствующая ей закрывающая скобка.
 Закрывающая скобка не должна идти впереди открывающей.*/
 
-const areBracketsBalanced = (str) => {
-    let arrayOfStr = str.split('');
-    let counter = 0
+const areBracketsBalanced = str => {
+  let arrayOfStr = str.split('');
+  let counter = 0;
 
-    arrayOfStr.every((el) => {
-        el === "(" ? (counter += 1) : (counter -= 1)
-        return counter >= 0
-    })
-    return counter === 0
-
-
+  arrayOfStr.every(el => {
+    el === '(' ? (counter += 1) : (counter -= 1);
+    return counter >= 0;
+  });
+  return counter === 0;
 };
-console.log(areBracketsBalanced('(((()))))))))'))
+console.log(areBracketsBalanced('(((()))))))))'));

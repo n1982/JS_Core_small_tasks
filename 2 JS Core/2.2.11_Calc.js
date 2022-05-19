@@ -4,21 +4,19 @@
 Вызов add/sub можно объединять в цепочку (fluent interface), методы возвращают новый объект класса.
 По вызову result() получаем результат вычислений.*/
 class Calc {
-constructor(el = 0) {
-    this.el = el ;
-
+  constructor(el = 0) {
+    this.el = el;
+  }
+  add(adden) {
+    return new Calc(this.el + adden);
+  }
+  sub(subtractor) {
+    return new Calc(this.el - subtractor);
+  }
+  result() {
+    return this.el;
+  }
 }
-add(adden){
-    return new Calc(this.el + adden)
-}
-sub(subtractor){
-    return new Calc(this.el - subtractor)
-}
-result(){
-    return this.el
-}
-}
-
 
 const calc = new Calc();
 console.log(calc.result()); // 0

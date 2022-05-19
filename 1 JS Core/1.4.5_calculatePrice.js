@@ -4,24 +4,24 @@
 
 // Данные на входе:
 const data = [
-    {
-        type: 'food',
-        price: 130,
-    },
-    {
-        type: 'clothes',
-        price: 7300,
-    },
-    {
-        type: 'other',
-        price: 1400,
-    },
+  {
+    type: 'food',
+    price: 130,
+  },
+  {
+    type: 'clothes',
+    price: 7300,
+  },
+  {
+    type: 'other',
+    price: 1400,
+  },
 ];
 
 const calculatePrice = (orders = []) => {
-
-    return orders.reduce((acc, oredrs) =>{return acc += oredrs.price},0)
-
+  return orders.reduce((acc, oredrs) => {
+    return (acc += oredrs.price);
+  }, 0);
 };
 
-console.log(calculatePrice(data))
+console.log(calculatePrice(data));

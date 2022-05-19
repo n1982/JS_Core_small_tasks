@@ -25,88 +25,106 @@ person - Владелец счета
 Disclamer
 Конечно, математику с плавающей точкой для обработки балансов использовать не стоит - будут накапливаться ошибки вычисления. Но в данном упражнении этим можно пренебречь.*/
 class Person {
-    constructor(firstName, lastName, birthDay) {
-        this.firstName = firstName
-        this.lastName = lastName
-        this.birthDay = birthDay
-    }
+  constructor(firstName, lastName, birthDay) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthDay = birthDay;
+  }
 
-    get fullName() {
-        return `${this.firstName} ${this.lastName}`
-    }
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 
-    getAge() {
-        let age
-        let now = new Date()
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const dateOfBirthDay = new Date(this.birthDay.split('-'));
-        const dateOfBirthDayThisEyar = new Date(today.getFullYear(), dateOfBirthDay.getMonth(), dateOfBirthDay.getDate())
-        age = today.getFullYear() - dateOfBirthDay.getFullYear()
-        if (today < dateOfBirthDayThisEyar) {
-            age = age - 1;
-        }
-        return age
-
+  getAge() {
+    let age;
+    let now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const dateOfBirthDay = new Date(this.birthDay.split('-'));
+    const dateOfBirthDayThisEyar = new Date(
+      today.getFullYear(),
+      dateOfBirthDay.getMonth(),
+      dateOfBirthDay.getDate(),
+    );
+    age = today.getFullYear() - dateOfBirthDay.getFullYear();
+    if (today < dateOfBirthDayThisEyar) {
+      age = age - 1;
     }
+    return age;
+  }
 }
 
 class Account extends Person {
+  constructor(person, amount) {
+    super(person.firstName, person.lastName, person.birthDay);
+    this.amount = amount;
+    this.history = [];
+  }
 
-    constructor(person, amount) {
-        super(person.firstName, person.lastName, person.birthDay)
-        this.amount = amount;
-        this.history = [];
-    }
+  static transfer(fromAccount, toAccount, amount) {
+    let descriptionOut = `Перевод на счет ${toAccount.fullName}`;
+    let descriptionIn = `Поступление со счета ${fromAccount.fullName}`;
+    fromAccount.amount -= amount;
+    toAccount.amount += amount;
+    fromAccount.history.push({
+      timestamp: Date.now(),
+      target: 'out',
+      amount,
+      descriptionOut,
+    });
+    toAccount.history.push({
+      timestamp: Date.now(),
+      target: 'in',
+      amount,
+      descriptionIn,
+    });
+  }
 
-    static transfer(fromAccount, toAccount, amount) {
-        let descriptionOut = `Перевод на счет ${toAccount.fullName}`
-        let descriptionIn = `Поступление со счета ${fromAccount.fullName}`
-        fromAccount.amount -= amount;
-        toAccount.amount += amount
-        fromAccount.history.push({timestamp: Date.now(), target: "out", amount, descriptionOut});
-        toAccount.history.push({timestamp: Date.now(), target: "in", amount, descriptionIn});
+  addMoney(amount, description) {
+    this.amount = this.amount + amount;
+    this.history.push({
+      timestamp: Date.now(),
+      target: 'in',
+      amount,
+      description,
+    });
+    console.log(description);
+  }
 
+  getAmount() {
+    return this.amount;
+  }
 
-    }
+  withdrawMoney(amount, description) {
+    this.amount = this.amount - amount;
+    this.history.push({
+      timestamp: Date.now(),
+      target: 'out',
+      amount,
+      description,
+    });
+    console.log(description);
+  }
 
-    addMoney(amount, description) {
-        this.amount = this.amount + amount
-        this.history.push({timestamp: Date.now(), target: "in", amount, description});
-        console.log(description)
-    }
-
-    getAmount() {
-        return this.amount
-    }
-
-    withdrawMoney(amount, description) {
-        this.amount = this.amount - amount;
-        this.history.push({timestamp: Date.now(), target: "out", amount, description});
-        console.log(description);
-
-    }
-
-    getAccountHistory() {
-        return this.history;
-    }
+  getAccountHistory() {
+    return this.history;
+  }
 }
-
 
 //Пример
 const alex = new Person('Alexey', 'Petrov', '1994-05-22');
 const alexAccount = new Account(alex, 1000);
 const helen = new Person('Helen', 'Smith', '1990-06-06');
 const helenAccount = new Account(helen, 400);
-console.log(alex)
-console.log(helen)
-console.log(alexAccount)
-console.log(helenAccount)
+console.log(alex);
+console.log(helen);
+console.log(alexAccount);
+console.log(helenAccount);
 alexAccount.addMoney(1000, 'Зарплата');
 const amount = alexAccount.getAmount();
-console.log(amount)
+console.log(amount);
 console.log(alexAccount.withdrawMoney(amount * 0.1, 'Налоги'));
 Account.transfer(alexAccount, helenAccount, 100);
 console.log(helenAccount.getAmount()); // 500
 console.log(alexAccount.getAmount()); // 1700
-console.log("после всех вызовов ", alexAccount)
-console.log(alexAccount.getAccountHistory())
+console.log('после всех вызовов ', alexAccount);
+console.log(alexAccount.getAccountHistory());

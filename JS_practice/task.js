@@ -17,21 +17,20 @@ Given an integer array nums sorted in non-decreasing order, remove the duplicate
 
 Не выделяйте дополнительное пространство для другого массива. Вы должны сделать это, изменив входной массив на месте с помощью O(1) дополнительной памяти.*/
 
-let nums = [0, 1, 1, 2, 2, 2, 3, 3, 4, 4]
+let nums = [0, 1, 1, 2, 2, 2, 3, 3, 4, 4];
 var removeDuplicates = function (nums) {
-    let indexL = 1
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] != nums[i-1]) {
-             nums[indexL] = nums[i]
-            indexL += 1
-        }
-
+  let indexL = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] != nums[i - 1]) {
+      nums[indexL] = nums[i];
+      indexL += 1;
     }
-    console.log(nums)
-    return indexL
+  }
+  console.log(nums);
+  return indexL;
 };
 
-console.log(removeDuplicates(nums))
+console.log(removeDuplicates(nums));
 
 // TODO 125. Valid Palindrome
 // https://leetcode.com/problems/valid-palindrome/
@@ -51,15 +50,16 @@ Example 2:
 Input: s = "race a car"
 Output: false
 Explanation: "raceacar" is not a palindrome.*/
-let str = "0P"
-var isPalindrome = function(s) {
-
-   if(!!s.match(/[a-zA-Z0-9]/gi)){
-        let subStr = s.match(/[a-zA-Z0-9]/gi).join('').toLowerCase()
-        return subStr === subStr.split('').reverse().join('')
-    }
-    return true
-
+let str = '0P';
+var isPalindrome = function (s) {
+  if (!!s.match(/[a-zA-Z0-9]/gi)) {
+    let subStr = s
+      .match(/[a-zA-Z0-9]/gi)
+      .join('')
+      .toLowerCase();
+    return subStr === subStr.split('').reverse().join('');
+  }
+  return true;
 };
 
-console.log(isPalindrome(str))
+console.log(isPalindrome(str));

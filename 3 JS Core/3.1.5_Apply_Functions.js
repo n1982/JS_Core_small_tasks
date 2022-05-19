@@ -13,37 +13,36 @@
 Стек трейс должен указывать на корректную позицию в функции-коллбэке Примечание: класс ExecutionError нужно сделать наследником другого класса*/
 
 class ExecutionError extends Error {
-
-    constructor(error) {
-        super();
-        this.error = error;
-        this.stack = error.stack
-    }
-    getArgData(){
-        return this.error.newName
-    }
+  constructor(error) {
+    super();
+    this.error = error;
+    this.stack = error.stack;
+  }
+  getArgData() {
+    return this.error.newName;
+  }
 }
 
 function applyFn(dataArr, callback) {
-    let res = {
-        succeeded: [],
-        errors: []
+  let res = {
+    succeeded: [],
+    errors: [],
+  };
+
+  dataArr.map(item => {
+    try {
+      return res.succeeded.push(callback(item));
+    } catch (e) {
+      e.newName = item;
+      e = new ExecutionError(e);
+      res.errors.push(e);
     }
+  });
 
-    dataArr.map(item => {
-        try {
-            return res.succeeded.push(callback(item))
-        } catch (e) {
-    e.newName = item;
-    e = new ExecutionError(e);
-    res.errors.push(e)
-        }
-    })
-
-    return res
+  return res;
 }
 
-const {succeeded, errors} = applyFn([1, 2, 3], (arg) => arg + 1)
+const { succeeded, errors } = applyFn([1, 2, 3], arg => arg + 1);
 //   succeeded: [2, 3, 4],
 //   errors: [],
 
