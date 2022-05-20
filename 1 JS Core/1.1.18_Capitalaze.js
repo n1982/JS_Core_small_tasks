@@ -14,4 +14,4 @@ function capitalize(str) {
 }
 
 const str = 'sOme RanDoM sTRING';
-console.log(capitalize(str)); 
+console.log(capitalize(str));

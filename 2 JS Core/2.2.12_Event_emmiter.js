@@ -24,10 +24,8 @@ class EventEmitter {
   on(eventName, callback) {
     // Принимаем название события и функцию её обрабатывающую и записываем в объект events
     const event = this.events[eventName];
-    if (event)
-      event.push(
-        callback,
-      ); // если такое событие уже зарегистрированно то добавляем в массив функций-обработчиков еще одну { name: [callback 1, callback 2, ...]
+    if (event) event.push(callback);
+    // если такое событие уже зарегистрированно то добавляем в массив функций-обработчиков еще одну { name: [callback 1, callback 2, ...]
     else this.events[eventName] = [callback]; // если нет такого события создаем новую запись в объекте events с присвоением массива из callback ...
   }
 
