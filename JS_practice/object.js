@@ -28,12 +28,12 @@ console.log(sumSalaries(salaries))*/
 //Напишите функцию count(obj), которая возвращает количество свойств объекта:
 
 let user = {
-    name: 'John',
-    age: 30
+  name: 'John',
+  age: 30,
 };
 
 function objKeyCount(object) {
-    return Object.keys(object).length
+  return Object.keys(object).length;
 }
 
-console.log(objKeyCount(user))
+console.log(objKeyCount(user));

@@ -21,36 +21,37 @@ changeAuthorName(newAuthorName) - изменяет имя автора на newA
 getCurrentReader() - возвращает имя текущего читателя или null, если книга доступна для выдачи*/
 
 function Book(name, author, year) {
-    this.name = name;
-    this.author = author;
-    this.year = year;
-    this.reader = null
+  this.name = name;
+  this.author = author;
+  this.year = year;
+  this.reader = null;
 
-    Book.prototype.isAvaliable = function () {
-        return this.reader === null ? true : false
+  Book.prototype.isAvaliable = function () {
+    return this.reader === null ? true : false;
+  };
+  Book.prototype.takeBook = function (readerName) {
+    if (this.reader === null) {
+      this.reader = readerName;
+      return true;
     }
-    Book.prototype.takeBook = function (readerName) {
-        if (this.reader === null) {
-            this.reader = readerName;
-            return true
-        } return false
+    return false;
+  };
+  Book.prototype.returnBook = function () {
+    if (this.reader !== null) {
+      this.reader = null;
+      return true;
     }
-    Book.prototype.returnBook = function () {
-        if(this.reader!== null){
-            this.reader = null
-            return true
-        }return false
-    }
-    Book.prototype.changeBookName = function (newBookName) {
-        this.name = newBookName
-        return !!(this.name === newBookName)
-    }
-    Book.prototype.changeAuthorName = function (newAuthorName) {
-        this.author = newAuthorName;
-        return !!(this.author === newAuthorName)
-    }
-    Book.prototype.getCurrentReader = function () {
-        return this.reader
-    }
-
+    return false;
+  };
+  Book.prototype.changeBookName = function (newBookName) {
+    this.name = newBookName;
+    return !!(this.name === newBookName);
+  };
+  Book.prototype.changeAuthorName = function (newAuthorName) {
+    this.author = newAuthorName;
+    return !!(this.author === newAuthorName);
+  };
+  Book.prototype.getCurrentReader = function () {
+    return this.reader;
+  };
 }

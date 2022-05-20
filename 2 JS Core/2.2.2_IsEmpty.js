@@ -4,19 +4,19 @@
 /*Напишите функцию isEmptyWithProtos, которая возвращает true, если у объекта и его прототипов(не включая Object.prototype) нет свойств, иначе возвращает false.*/
 
 function isEmpty(obj) {
-    let keys = Object.keys(obj).length;
-    return keys === 0;
+  let keys = Object.keys(obj).length;
+  return keys === 0;
 }
 
 function isEmptyWithProtos(obj) {
-    let keys = Object.keys(obj).length;
-    const proto = Object.getPrototypeOf(obj);
-    if (!proto) {
-        return true;
-    }
-    const keys_proto = Object.keys(proto).length;
-    keys += keys_proto;
-    return keys === 0;
+  let keys = Object.keys(obj).length;
+  const proto = Object.getPrototypeOf(obj);
+  if (!proto) {
+    return true;
+  }
+  const keys_proto = Object.keys(proto).length;
+  keys += keys_proto;
+  return keys === 0;
 }
 
 const obj = Object.create(null);

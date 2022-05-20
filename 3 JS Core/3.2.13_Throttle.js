@@ -15,30 +15,28 @@
 второй на 500 мс (пятая попытка вызова функции после 500 мс задержки)
 и третий на 1000 мс (десятая попытка вызова функции после 1000 мс задержки).*/
 const throttle = (fn, throttleTime) => {
+  let start = -Infinity;
+  let cachedResult;
 
+  return function () {
+    const end = Date.now();
+    if (end - start >= throttleTime) {
+      start = end;
+      cachedResult = fn.apply(this, arguments);
+    }
 
-    let start = -Infinity;
-    let cachedResult;
-
-    return function() {
-        const end = Date.now();
-             if (end - start >= throttleTime) {
-            start = end;
-            cachedResult = fn.apply(this, arguments);
-        }
-
-        return cachedResult;
-    };
+    return cachedResult;
+  };
 };
 let counter = 0;
 const fn = () => {
-    counter++;
+  counter++;
 };
 
 const throttledFn = throttle(fn, 500); // функция может быть вызвана не чаще, чем раз в 500 мс
-console.log(throttledFn)
+console.log(throttledFn);
 const intervalId = setInterval(throttledFn, 100);
-console.log(intervalId)
+console.log(intervalId);
 setTimeout(() => clearInterval(intervalId), 1000); // удаляем интервал через 10 вызовов
 
 console.log(counter); // 3

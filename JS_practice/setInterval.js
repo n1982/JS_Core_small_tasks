@@ -28,16 +28,17 @@ Hello World. 200 // При 1100 мс
 
     Вот возможное решение:*/
 
-    let lastIntervalId, counter = 5;
+let lastIntervalId,
+  counter = 5;
 const greeting = delay => {
-    if (counter === 5) {
-        clearInterval(lastIntervalId);
-        lastIntervalId = setInterval(() => {
-            console.log('Hello World. ', delay);
-            greeting(delay + 100);
-        }, delay);
-        counter = 0;
-    }
-    counter += 1;
+  if (counter === 5) {
+    clearInterval(lastIntervalId);
+    lastIntervalId = setInterval(() => {
+      console.log('Hello World. ', delay);
+      greeting(delay + 100);
+    }, delay);
+    counter = 0;
+  }
+  counter += 1;
 };
 greeting(100);

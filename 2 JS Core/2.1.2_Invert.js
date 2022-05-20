@@ -4,9 +4,10 @@
 Если объект содержит повторяющиеся значения, последующие значения перезаписывают присвоения свойств предыдущих значений.*/
 
 function invert(obj) {
-    return Object.fromEntries(Object.entries(obj).map(([key, val]) => [val, key]));
-
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, val]) => [val, key]),
+  );
 }
 
-console.log(invert({a: 1, b: 2, c: 3}))
+console.log(invert({ a: 1, b: 2, c: 3 }));
 // { 1: a, 2: b, 3: c }

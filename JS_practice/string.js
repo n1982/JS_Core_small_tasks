@@ -6,7 +6,6 @@
 
 **Output**: Boolean */
 
-
 /*
 function isUnique(string) {
     if (new Set(string).size === string.length) return true
@@ -44,27 +43,38 @@ console.log(removeDupes('abababcdcdcd')) // -> 'abcd'*/
 
 **Output**: String*/
 function highestFrequency(array) {
-    let objMap = {}
-    let res = ''
-    let currentVal = 0
-    for (let i = 0; i < array.length; i++) {
-        if (objMap[array[i]]) {
-            objMap[array[i]] += 1
-        } else {
-            objMap[array[i]] = 1
-        }
+  let objMap = {};
+  let res = '';
+  let currentVal = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (objMap[array[i]]) {
+      objMap[array[i]] += 1;
+    } else {
+      objMap[array[i]] = 1;
     }
-    for (const [key, value] of Object.entries(objMap)) {
-        if (currentVal < value) {
-            currentVal = value
-            res = key
-        }
-
+  }
+  for (const [key, value] of Object.entries(objMap)) {
+    if (currentVal < value) {
+      currentVal = value;
+      res = key;
     }
-   return res
+  }
+  return res;
 }
 
-console.log(highestFrequency(['a', 'b', 'c', 'c', 'd', 'e'])) // -> c
-console.log(highestFrequency(['abc', 'def', 'abc', 'def', 'abc', 'def'])) // -> abc
-console.log(highestFrequency(['abc', 'def'])) // -> abc
-console.log(highestFrequency(['abc', 'abc', 'def', 'def', 'def', 'ghi', 'ghi', 'ghi', 'ghi'])) // -> ghi
+console.log(highestFrequency(['a', 'b', 'c', 'c', 'd', 'e'])); // -> c
+console.log(highestFrequency(['abc', 'def', 'abc', 'def', 'abc', 'def'])); // -> abc
+console.log(highestFrequency(['abc', 'def'])); // -> abc
+console.log(
+  highestFrequency([
+    'abc',
+    'abc',
+    'def',
+    'def',
+    'def',
+    'ghi',
+    'ghi',
+    'ghi',
+    'ghi',
+  ]),
+); // -> ghi

@@ -37,30 +37,33 @@ function getPINs(observed) {
         '8': ['5', '7', '9', '0'],
         '9': ['6', '8']
     }
-    var strDigits = observed.toString().split("");
+    let pinArr = observed.split('')
+    console.log(pinArr);
+    // var strDigits = observed.toString().split("");
+    // console.log(strDigits)
 
-    getCombos(strDigits, 0, "");
-    return combos;
+    // getCombos(strDigits, 0, "");
+    // return combos;
 
 
-    // Depth first combinatorial traversal
-    function getCombos(digits, idx, curCombo) {
+    // // Depth first combinatorial traversal
+    // function getCombos(digits, idx, curCombo) {
 
-        // Get possible candidates
-        var curDigit = digits[idx];
-        // console.log(curDigit)
-        var candidates = new Set(neighbors[curDigit]);
-        candidates.add(curDigit);
-        console.log(candidates)
+    //     // Get possible candidates
+    //     var curDigit = digits[idx];
+    //     // console.log(curDigit)
+    //     var candidates = new Set(neighbors[curDigit]);
+    //     candidates.add(curDigit);
+    //     console.log(candidates)
 
-        // console.log(digits, idx, curCombo, candidates); // Pretty cool
-        candidates.forEach(idx == digits.length - 1 ? reachedEnd : goDeeper);
+    //     // console.log(digits, idx, curCombo, candidates); // Pretty cool
+    //     candidates.forEach(idx == digits.length - 1 ? reachedEnd : goDeeper);
 
-        // (Avoiding anon funcs)
-        function reachedEnd(candidate) { combos.push(curCombo + candidate); }
-        function goDeeper(candidate) {
-            getCombos(digits, idx + 1, curCombo + candidate)
-        }
-    }
+    //     // (Avoiding anon funcs)
+    //     function reachedEnd(candidate) { combos.push(curCombo + candidate); }
+    //     function goDeeper(candidate) {
+    //         getCombos(digits, idx + 1, curCombo + candidate)
+    //     }
+    // }
 }
 console.log(getPINs('11'))

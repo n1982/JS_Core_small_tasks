@@ -21,7 +21,6 @@ api.notifyEmployee(employeeId, text); // Принимает id сотрудни�
 api.notifyAdmin(error); // Принимает ошибку
 api.sendBudgetToAccounting(summarySalaries); // Принимает суммарную ЗП*/
 
-
 /*try {
     // Получить данные всех сотрудников
 
@@ -60,104 +59,106 @@ api.sendBudgetToAccounting(summarySalaries); // Принимает суммар�
     throw api.notifyAdmin(err)
 }*/
 async function increaseSalary() {
-    let newBudget = 0;
-    let successCounter = 0;
-    const employees = await api.getEmployees();
-    const averageSalaries = Math.floor((employees.reduce((acc, el) => acc += el.salary, 0)) / employees.length);
+  let newBudget = 0;
+  let successCounter = 0;
+  const employees = await api.getEmployees();
+  const averageSalaries = Math.floor(
+    employees.reduce((acc, el) => (acc += el.salary), 0) / employees.length,
+  );
 
-    try {
-        //перебираем сотрудников из списка
-        for (let {id, name, salary} of employees) {
-            //повышенная ЗП
-            let changedSalary = 0;
-            const sendRequestSalary = async () => {
-                try {
-                    //запрос на увеличение ЗП
+  try {
+    //перебираем сотрудников из списка
+    for (let { id, name, salary } of employees) {
+      //повышенная ЗП
+      let changedSalary = 0;
+      const sendRequestSalary = async () => {
+        try {
+          //запрос на увеличение ЗП
 
-                    await api.setEmployeeSalary(id, changedSalary);
+          await api.setEmployeeSalary(id, changedSalary);
 
-                    //    отправить уведомление о повышении зарплаты
-                    await api.notifyEmployee(id, `Hello, ${name}! Congratulations, your new salary is ${changedSalary}!`);
-                    //подсчет успешных запросов
-                    successCounter++;
-                    //формирование бюджета
-                    newBudget += changedSalary;
-                } catch (error) {
-                    //сообщение администратору об ошибке
-                    await api.notifyAdmin(error);
-                }
-            }
-
-            //повышение ЗП
-            if (salary > averageSalaries) {
-                changedSalary = Math.floor(salary * 1.1);
-                await sendRequestSalary();
-            } else if (salary < averageSalaries) {
-                changedSalary = Math.floor(salary * 1.2);
-                await sendRequestSalary();
-            }
+          //    отправить уведомление о повышении зарплаты
+          await api.notifyEmployee(
+            id,
+            `Hello, ${name}! Congratulations, your new salary is ${changedSalary}!`,
+          );
+          //подсчет успешных запросов
+          successCounter++;
+          //формирование бюджета
+          newBudget += changedSalary;
+        } catch (error) {
+          //сообщение администратору об ошибке
+          await api.notifyAdmin(error);
         }
+      };
 
-    } catch (error) {
-
-        //сообщение администратору об ошибке
-        await api.notifyAdmin(error);
-
-    } finally {
-        //    отправить суммарную зарплату в бухгалтерию
-
-        await api.sendBudgetToAccounting(newBudget);
+      //повышение ЗП
+      if (salary > averageSalaries) {
+        changedSalary = Math.floor(salary * 1.1);
+        await sendRequestSalary();
+      } else if (salary < averageSalaries) {
+        changedSalary = Math.floor(salary * 1.2);
+        await sendRequestSalary();
+      }
     }
+  } catch (error) {
+    //сообщение администратору об ошибке
+    await api.notifyAdmin(error);
+  } finally {
+    //    отправить суммарную зарплату в бухгалтерию
 
-    //возвращаем кол-во успешных операций увеличения ЗП
+    await api.sendBudgetToAccounting(newBudget);
+  }
 
-    return successCounter;
+  //возвращаем кол-во успешных операций увеличения ЗП
+
+  return successCounter;
 }
 
 const api = {
-    _employees: [
-        { id: 1, name: 'Alex', salary: 120000 },
-        { id: 2, name: 'Fred', salary: 110000 },
-        { id: 3, name: 'Bob', salary: 80000 },
-    ],
-    getEmployees() {
-        return new Promise((resolve) => {
-            resolve(this._employees.slice());
-        });
-    },
-    setEmployeeSalary(employeeId, newSalary) {
-        return new Promise((resolve) => {
-            const updatedEmployees = this._employees.map((employee) =>
-                employee.id !== employeeId
-                    ? employee
-                    : {
-                        ...employee,
-                        salary: newSalary,
-                    }
-            );
-            this._employees = updatedEmployees;
-            resolve(this._employees.find(({ id }) => id === employeeId));
-        });
-    },
-    notifyEmployee(employeeId, text) {
-        return new Promise((resolve) => {
-            resolve(true);
-        });
-    },
-    notifyAdmin(error) {
-        return new Promise((resolve) => {
-            resolve();
-        });
-    },
-    setEmployees(newEmployees) {
-        return new Promise((resolve) => {
-            this._employees = newEmployees;
-            resolve();
-        });
-    },
-    sendBudgetToAccounting(newBudget) {
-        return new Promise((resolve) => {
-            resolve();
-        });
-    },
+  _employees: [
+    { id: 1, name: 'Alex', salary: 120000 },
+    { id: 2, name: 'Fred', salary: 110000 },
+    { id: 3, name: 'Bob', salary: 80000 },
+  ],
+  getEmployees() {
+    return new Promise(resolve => {
+      resolve(this._employees.slice());
+    });
+  },
+  setEmployeeSalary(employeeId, newSalary) {
+    return new Promise(resolve => {
+      const updatedEmployees = this._employees.map(employee =>
+        employee.id !== employeeId
+          ? employee
+          : {
+              ...employee,
+              salary: newSalary,
+            },
+      );
+      this._employees = updatedEmployees;
+      resolve(this._employees.find(({ id }) => id === employeeId));
+    });
+  },
+  notifyEmployee(employeeId, text) {
+    return new Promise(resolve => {
+      resolve(true);
+    });
+  },
+  notifyAdmin(error) {
+    return new Promise(resolve => {
+      resolve();
+    });
+  },
+  setEmployees(newEmployees) {
+    return new Promise(resolve => {
+      this._employees = newEmployees;
+      resolve();
+    });
+  },
+  sendBudgetToAccounting(newBudget) {
+    return new Promise(resolve => {
+      resolve();
+    });
+  },
 };

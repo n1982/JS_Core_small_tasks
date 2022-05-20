@@ -16,37 +16,31 @@ properties (optional) - аргумент, который установит св
 В JavaScript все является объектом, кроме: null и undefined.
 NaN, Infinity, /regular expression literals/, function(){} - это всё тоже объекты.*/
 
-
 Object.create = function (proto, propertiesObject) {
-    if((arguments.length === 0 )) throw new TypeError;
-    if (typeof proto !== 'object' || proto === null) {
-        throw new Error
-    }
-    let result = {};
-    if (propertiesObject === null) return result
-    if (proto != null)
-        result.__proto__ = proto;
-    if (typeof(propertiesObject) !== "undefined")
-        Object.defineProperties(result, propertiesObject);
-    return result;
+  if (arguments.length === 0) throw new TypeError();
+  if (typeof proto !== 'object' || proto === null) {
+    throw new Error();
+  }
+  let result = {};
+  if (propertiesObject === null) return result;
+  if (proto != null) result.__proto__ = proto;
+  if (typeof propertiesObject !== 'undefined')
+    Object.defineProperties(result, propertiesObject);
+  return result;
 };
 
-
-
-
-
 const A = {
-    objectName: 'Object A',
-    getObjectName: function () {
-        return `This is ${this.objectName}!`;
-    },
+  objectName: 'Object A',
+  getObjectName: function () {
+    return `This is ${this.objectName}!`;
+  },
 };
 
 // const A = null;
 const B = Object.create(A, {
-    objectName: {
-        value: 'Object B',
-    },
+  objectName: {
+    value: 'Object B',
+  },
 });
 // const B = null
 
@@ -58,5 +52,5 @@ A.hasOwnProperty('objectName'); // true
 
 B.hasOwnProperty('getObjectName'); // false
 B.hasOwnProperty('objectName'); // true
-console.log(B.hasOwnProperty('getObjectName'))
-console.log(new Object())
+console.log(B.hasOwnProperty('getObjectName'));
+console.log(new Object());
