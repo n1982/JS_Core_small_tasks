@@ -22,7 +22,7 @@
 
 Детектив, мы рассчитываем на вас!
  */
-
+//TODO разобраться в алгоритме решения
 function getPINs(observed) {
   let combos = [];
   const neighbors = {
@@ -37,36 +37,32 @@ function getPINs(observed) {
     8: ['5', '7', '9', '0'],
     9: ['6', '8'],
   };
-  let pinArr = observed.split('');
-  console.log(pinArr);
-  return combos
+
+  var strDigits = observed.toString().split('');
+
+  getCombos(strDigits, 0, '');
+  return combos;
+
+  // Depth first combinatorial traversal
+  function getCombos(digits, idx, curCombo) {
+    // Get possible candidates
+    var curDigit = digits[idx];
+    // console.log(curDigit)
+    var candidates = new Set(neighbors[curDigit]);
+    candidates.add(curDigit);
+    console.log(candidates);
+
+    // console.log(digits, idx, curCombo, candidates); // Pretty cool
+    candidates.forEach(idx == digits.length - 1 ? reachedEnd : goDeeper);
+
+    // (Avoiding anon funcs)
+    function reachedEnd(candidate) {
+      combos.push(curCombo + candidate);
+    }
+    function goDeeper(candidate) {
+      getCombos(digits, idx + 1, curCombo + candidate);
+    }
+  }
 }
-
-// var strDigits = observed.toString().split("");
-// console.log(strDigits)
-
-// getCombos(strDigits, 0, "");
-// return combos;
-
-// // Depth first combinatorial traversal
-// function getCombos(digits, idx, curCombo) {
-
-//     // Get possible candidates
-//     var curDigit = digits[idx];
-//     // console.log(curDigit)
-//     var candidates = new Set(neighbors[curDigit]);
-//     candidates.add(curDigit);
-//     console.log(candidates)
-
-//     // console.log(digits, idx, curCombo, candidates); // Pretty cool
-//     candidates.forEach(idx == digits.length - 1 ? reachedEnd : goDeeper);
-
-//     // (Avoiding anon funcs)
-//     function reachedEnd(candidate) { combos.push(curCombo + candidate); }
-//     function goDeeper(candidate) {
-//         getCombos(digits, idx + 1, curCombo + candidate)
-//     }
-// }
-//}
 
 console.log(getPINs('11'));
