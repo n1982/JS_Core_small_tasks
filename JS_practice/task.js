@@ -1,4 +1,4 @@
-// TODO <Remove Duplicates from Sorted Array>
+// <Remove Duplicates from Sorted Array>
 /*
 https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.
@@ -52,7 +52,7 @@ Output: false
 Explanation: "raceacar" is not a palindrome.*/
 let str = '0P';
 var isPalindrome = function (s) {
-  if (!!s.match(/[a-zA-Z0-9]/gi)) {
+  if (s.match(/[a-zA-Z0-9]/gi)) {
     let subStr = s
       .match(/[a-zA-Z0-9]/gi)
       .join('')
