@@ -11,6 +11,7 @@ Write a function that when given a URL as a string, parses out just the domain n
 function domainName(url) {
 
     return url.match(
+      // eslint-disable-next-line no-useless-escape
       /(https?:\/\/)?(w*\.)?([\da-z\-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?/
     )[3];
   //your code here
