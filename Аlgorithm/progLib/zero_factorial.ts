@@ -26,4 +26,8 @@ const zeroFactorial = (num: number): number => {
   return nulls;
 };
 
-zeroFactorial(10);
+console.log(zeroFactorial(10));
+console.log(zeroFactorial(1));
+console.log(zeroFactorial(25));
+console.log(zeroFactorial(-1));
+console.log(zeroFactorial(1000));
