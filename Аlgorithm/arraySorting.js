@@ -8,7 +8,7 @@ let shuffling = (arr, i, j) => {
 };
 
 //пузырькова сортировка
-function bubleSorting(array) {
+function bubbleSorting(array) {
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length; j++) {
       if (comparator(array[i], array[j]) < 0) {
@@ -18,7 +18,7 @@ function bubleSorting(array) {
   }
   console.log(array);
 }
-bubleSorting(unSortArray);
+bubbleSorting(unSortArray);
 
 //сортировка выбором
 function sorBySelection(array) {}
