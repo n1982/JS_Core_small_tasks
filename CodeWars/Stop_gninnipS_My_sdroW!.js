@@ -3,13 +3,15 @@
 
 Examples: spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" spinWords( "This is a test") => returns "This is a test" spinWords( "This is another test" )=> returns "This is rehtona test"*/
 function spinWords(string) {
-    return string.split(" ").map((item) => {
-    if (item.length >4) {
-        return item.split('').reverse().join('')
-
-    }
-        return item
-    }).join(' ');
+  return string
+    .split(' ')
+    .map(item => {
+      if (item.length > 4) {
+        return item.split('').reverse().join('');
+      }
+      return item;
+    })
+    .join(' ');
 }
 
 console.log(spinWords('Hey fellow warriors'));
