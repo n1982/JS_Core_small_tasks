@@ -1,9 +1,9 @@
-/*Урок с кодом
+/*
 Capitalize
 Реализуйте функцию capitalize, которая принимает строку в качестве аргумента и возвращает новую строку, 
 в которой первые буквы слов заглавные, а все остальные - строчные.*/
 
-function capitalize(str) {
+function capitalize(str:string): string {
   let arr = str.toLowerCase().split(' ');
 
   return arr
@@ -13,5 +13,7 @@ function capitalize(str) {
     .join(' ');
 }
 
-const str = 'sOme RanDoM sTRING';
-console.log(capitalize(str));
+
+
+const string = 'sOme RanDoM sTRING';
+console.log(capitalize(string));
