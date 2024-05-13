@@ -8,13 +8,13 @@
 Закрывающая скобка не должна идти впереди открывающей.*/
 
 const areBracketsBalanced = str => {
-  let arrayOfStr = str.split('');
-  let counter = 0;
+    let arrayOfStr = str.split('');
+    let counter = 0;
 
-  arrayOfStr.every(el => {
-    el === '(' ? (counter += 1) : (counter -= 1);
-    return counter >= 0;
-  });
-  return counter === 0;
+    arrayOfStr.every(el => {
+        el === '(' ? (counter += 1) : (counter -= 1);
+        return counter >= 0;
+    });
+    return counter === 0;
 };
-console.log(areBracketsBalanced('(((()))))))))'));
+console.log(areBracketsBalanced(')(((((((((()))))))))'));

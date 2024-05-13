@@ -3,6 +3,7 @@
 
 
 function findAllIdx<T>(arr: T[], value: T): number[] | [] {
+  
   return arr
     .map((el, index) => {
       if (el === value) return index;
