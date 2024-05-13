@@ -13,5 +13,5 @@ function incrementCounter(counterName) {
   return data[counterName];
 }
 
-incrementCounter('fierst'); // 6
+incrementCounter('first'); // 6
 incrementCounter('bannerClose'); // 1

@@ -1,6 +1,8 @@
 /*В данном задании вам нужно будет реализовать полифл Object.create.
 
-Реализуйте аналог стандартной фунции Object.create - создаёт и возвращает новый объект, прототипом которого является первый аргумент, переданный в функцию. Если передан второй аргумент - устанавливает его в качестве свойств для нового объекта. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+Реализуйте аналог стандартной фунции Object.create - создаёт и возвращает новый объект, прототипом которого является первый аргумент, 
+переданный в функцию. Если передан второй аргумент - устанавливает его в качестве свойств для нового объекта.+
+ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
 
 Ваша функция должна принимать два параметра:
 
@@ -17,30 +19,30 @@ properties (optional) - аргумент, который установит св
 NaN, Infinity, /regular expression literals/, function(){} - это всё тоже объекты.*/
 
 Object.create = function (proto, propertiesObject) {
-  if (arguments.length === 0) throw new TypeError();
-  if (typeof proto !== 'object' || proto === null) {
-    throw new Error();
-  }
-  let result = {};
-  if (propertiesObject === null) return result;
-  if (proto != null) result.__proto__ = proto;
-  if (typeof propertiesObject !== 'undefined')
-    Object.defineProperties(result, propertiesObject);
-  return result;
+    if (arguments.length === 0) throw new TypeError();
+    if (typeof proto !== 'object' || proto === null) {
+        throw new Error();
+    }
+    let result = {};
+    if (propertiesObject === null) return result;
+    if (proto != null) result.__proto__ = proto;
+    if (typeof propertiesObject !== 'undefined')
+        Object.defineProperties(result, propertiesObject);
+    return result;
 };
 
 const A = {
-  objectName: 'Object A',
-  getObjectName: function () {
-    return `This is ${this.objectName}!`;
-  },
+    objectName: 'Object A',
+    getObjectName: function () {
+        return `This is ${this.objectName}!`;
+    },
 };
 
 // const A = null;
 const B = Object.create(A, {
-  objectName: {
-    value: 'Object B',
-  },
+    objectName: {
+        value: 'Object B',
+    },
 });
 // const B = null
 
