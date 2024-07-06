@@ -19,42 +19,25 @@ Throttle необходим для того, чтобы обеспечить в�
 первый вызов функции на 0мс (первая попытка вызова функции после 0 мс задержки),
 второй на 500 мс (пятая попытка вызова функции после 500 мс задержки)
 и третий на 1000 мс (десятая попытка вызова функции после 1000 мс задержки).*/
+
 const throttle = (fn, throttleTime) => {
-    let start = -Infinity;
-    let cachedResult;
-
+    const start = Date.now();
+    let cashedResult = fn.apply();
     return function () {
-        const end = Date.now();
-        if (end - start >= throttleTime) {
-            start = end;
-            cachedResult = fn.apply(this, arguments);
-        }
-
-        return cachedResult;
+        let end = Date.now();
+        console.log(end - start);
+        if (end - start >= throttleTime)
+            cashedResult = fn.apply(this, arguments);
+        return cashedResult;
     };
 };
 
-let counter = 0;
-const fn = () => {
-    counter++;
-};
+function fn() {
+    console.log('call function');
+}
 
 const throttledFn = throttle(fn, 500); // функция может быть вызвана не чаще, чем раз в 500 мс
-console.log(throttledFn);
-const intervalId = setInterval(throttledFn, 100);
+
+const intervalId = setInterval(throttledFn, 500);
 console.log(intervalId);
-setTimeout(() => clearInterval(intervalId), 1000); // удаляем интервал через 10 вызовов
-
-console.log(counter); // 3
-
-const arr1 = [1, 2, 3, [4, [5, 6]]];
-function flatArray(arr) {
-    return arr.reduce((acc, item) => {
-        if (Array.isArray(item)) {
-            flatArray(item);
-        } else {
-            acc.push(item);
-        }
-    }, []);
-}
-console.log(flatArray(arr1));
+setTimeout(() => clearInterval(intervalId), 1600); // удаляем интервал через 10 вызовов
