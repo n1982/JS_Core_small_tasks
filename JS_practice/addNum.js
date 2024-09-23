@@ -20,3 +20,4 @@ console.log('fhfh');
 console.log(add(9)(10)()); //19
 console.log(add(9)()); //9
 console.log(add()); //0
+
