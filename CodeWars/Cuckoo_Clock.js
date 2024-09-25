@@ -21,6 +21,26 @@ const expectedTimes = "08:00"
 */
 
 function cuckooClock(inputTime, chimes) {
-    // Write code
-    return inputTime;
+    let hour = inputTime.split(':').map(Number)[0];
+    let minutes = inputTime.split(':').map(Number)[1];
+    let count = 0;
+    console.log((hour + 1) % 12);
+    while (count < chimes) {
+        if (minutes === 60) {
+            hour = (hour + 1) % 12 || 12;
+            minutes = 0;
+        }
+        if (minutes === 0) count += hour;
+
+        if (minutes !== 0 && minutes % 15 === 0) {
+            count++;
+        }
+
+        if (count >= chimes) break;
+        minutes++;
+    }
+
+    if (hour < 10) hour = `0${hour}`;
+    if (minutes === 0) minutes = '00';
+    return `${hour}:${minutes}`;
 }
